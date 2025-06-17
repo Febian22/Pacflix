@@ -56,6 +56,18 @@ class NewUser(User):
         User.__init__(_, name)
     
     def pick_plan(_, new_plan:str, referral_code:str):
+        '''
+        method pick_plan
+        parameter :
+        new_plan (str) has to be 1 out of 3 plan : Basic Plan, Standard Plan, Premium Plan
+        referral_code (str) can be blanked ''
+
+        return:
+        None
+
+        Print: 
+        " You choose : {new_plan} for Rp. {price} "
+        '''
         _.existing_referral = ['PacflixSuper',
                                'PacflixMantap',
                                'PacflixJuara'
@@ -79,6 +91,17 @@ class ExistUser(User):
         _.duration = duration
     
     def check_plan(_):
+        '''
+        method check_plan
+        parameter :
+        None
+
+        return:
+        None
+
+        Print: 
+        Benefit Table of current plan
+        '''
         header = '|'
         content_list = []
         for component in ['Services', _.plan]:
@@ -112,7 +135,20 @@ class ExistUser(User):
         print(header)
         for content in content_list:
             print(content)
+
     def upgrade_plan(_, new_plan):
+        '''
+        method upgrade_plan
+        parameter :
+        new_plan (str) has to be 1 out of 3 plan : Basic Plan, Standard Plan, Premium Plan
+        The new plan can only upgrade the current not downgrade
+
+        return:
+        None
+
+        Print: 
+        " You choose to upgrade to : {new_plan} for Rp. {price} "
+        '''
         key_database = list(_.database.keys())
         if new_plan not in _.database:
             raise TypeError("New plan is not Existed")
@@ -128,7 +164,7 @@ class ExistUser(User):
             if _.duration > 12:
                 discount += 0.05
             price = _.database[new_plan][7] * 1000 * (1-discount)
-            print (f"You choose to Upgrade '{new_plan}' for Rp. {price}")
+            print (f"You choose to Upgrade to '{new_plan}' for Rp. {price}")
 
 
 
