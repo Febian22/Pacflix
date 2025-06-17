@@ -17,6 +17,7 @@ class User:
         return:
         None
         '''
+        print("PacFlix all Plan Benefit : \n")
         header = "|"
         content_list = []
         for component in _.database:
@@ -50,6 +51,8 @@ class User:
         print(header)
         for content in content_list:
             print(content)
+        print("\n"*2)
+
 
 class NewUser(User):
     def __init__(_, name):
@@ -70,7 +73,8 @@ class NewUser(User):
         '''
         _.existing_referral = ['PacflixSuper',
                                'PacflixMantap',
-                               'PacflixJuara'
+                               'PacflixJuara',
+                               'bagus-9f92'
                                ]
         if new_plan not in _.database:
             raise TypeError("Choose 1 out of 3 plan: Basic Plan, Standard Plan, Premium Plan")
@@ -80,7 +84,8 @@ class NewUser(User):
             print("Refferal Code Doesn't Exist")
             price = _.database[new_plan][7] * 1000
         
-        print(f"You choose : {new_plan} for Rp. {price} ")
+        print(f"You choose : {new_plan} for Rp. {price} \n")
+
 
 class ExistUser(User):
     def __init__(_, name, plan:str, duration:int):
@@ -102,6 +107,9 @@ class ExistUser(User):
         Print: 
         Benefit Table of current plan
         '''
+        print(f"Username : {_.username}")
+        print(f"Plan Choosed : {_.plan}")
+        print(f"Duration on plan : {_.duration}\n")
         header = '|'
         content_list = []
         for component in ['Services', _.plan]:
@@ -135,6 +143,7 @@ class ExistUser(User):
         print(header)
         for content in content_list:
             print(content)
+        print("\n"*2)
 
     def upgrade_plan(_, new_plan):
         '''
@@ -155,7 +164,7 @@ class ExistUser(User):
         new_index = key_database.index(new_plan)
         old_index = key_database.index(_.plan)
 
-        if old_index > new_index:
+        if old_index >= new_index:
             print('You can only upgrade to higher tier')
         elif old_index > 2:
             print("You cant upgrade anymore")
@@ -164,7 +173,7 @@ class ExistUser(User):
             if _.duration > 12:
                 discount += 0.05
             price = _.database[new_plan][7] * 1000 * (1-discount)
-            print (f"You choose to Upgrade to '{new_plan}' for Rp. {price}")
+            print (f"Upgrade {_.username}'s plan, from '{_.plan}' to '{new_plan}' for Rp. {int(price)}\n")
 
 
 
